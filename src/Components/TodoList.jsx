@@ -8,19 +8,32 @@ const TodoList = () => {
     const [listInputs, setListInputs] = useState({});
 
     const handleAddTodo = () => {
-      if (headingInput.trim() !== '') {
-          setTodos([...todos, { heading: headingInput, lists: [] }]);
-          setHeadingInput('');
-      }
-  };
-  
-     const handleDeleteTodo = (index) => {
-      const newTodos = [...todos];
-      newTodos.splice(index, 1);
-      setTodos(newTodos);
-  };
-  
-  return (
+    if (headingInput.trim() !== '') {
+        setTodos([...todos, { heading: headingInput, lists: [] }]);
+        setHeadingInput('');
+    }
+};
+
+    const handleAddList = (index) => {
+    if (listInputs[index] && listInputs[index].trim() !== '') {
+        const newTodos = [...todos];
+        newTodos[index].lists.push(listInputs[index]);
+        setTodos(newTodos);
+        setListInputs({ ...listInputs, [index]: '' });
+    }
+};
+
+const handleListInputChange = (index, value) => {
+    setListInputs({ ...listInputs, [index]: value });
+};
+
+    const handleDeleteTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+};
+
+return (
     <>
       <div className="todo-container">
         <h1 className="title">My Todo List</h1>
@@ -42,17 +55,43 @@ const TodoList = () => {
     {todos.map((todo, index) => (
         <div key={index} className="todo-card">
             <h3>{todo.heading}</h3>
-            <button
-                className="delete-button-heading"
-                onClick={() => handleDeleteTodo(index)}
-            >
-                Delete Heading
-            </button>
-        </div>
-    ))}
-</div>
-    </>
-  );
-};
 
-export default TodoList;
+        <ul>
+            {todo.lists.map((list, listIndex) => (
+                <li key={listIndex}>
+                    <p>{list}</p>
+                </li>
+            ))}
+        </ul>
+
+        <div className="list-input-container">
+    <input
+        type="text"
+        className="list-input"
+        placeholder="Enter list item"
+        value={listInputs[index] || ''}
+        onChange={(e) => handleListInputChange(index, e.target.value)}
+    />
+
+    <button
+        className="add-list-button"
+        onClick={() => handleAddList(index)}
+    >
+        Add List
+    </button>
+    </div>
+
+    <button
+        className="delete-button-heading"
+        onClick={() => handleDeleteTodo(index)}
+    >
+        Delete Heading
+    </button>       
+    </div>
+    ))}
+    </div>
+          </>
+    );
+    };
+
+    export default TodoList;
