@@ -14,6 +14,9 @@
     font-size: 24px;
     color: #333;
     margin-bottom: 20px;
+    background-color: #f3e8ff;
+    padding: 15px;
+    border-radius: 8px;
 }
 .input-container{
     display: flex;
@@ -34,7 +37,7 @@
 .todo-card {
     width: 300px; /* Adjust the width of the cards as needed */
     padding: 20px;
-    background-color: white;
+    background-color: #f3e8ff;
     border-radius: 8px;
     margin-bottom: 20px;
     border: 2px solid grey;
@@ -78,7 +81,7 @@
 
 .delete-button-heading {
     height: 40px;
-    background-color: rgb(46, 163, 46);
+    background-color: #d32f2f;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -101,7 +104,7 @@
 }
 
 .add-list-button {
-    background-color: rgb(46, 163, 46);
+    background-color: #ff69b4;
     color: #fff;
     border: none;
     padding: 7px 20px;
